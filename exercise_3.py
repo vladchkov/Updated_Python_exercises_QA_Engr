@@ -2,7 +2,7 @@ import csv
 from datetime import datetime
 from http import HTTPStatus
 
-import tzlocal
+import pytz
 
 
 def parse_jmeter_logs(file_name: str) -> None:
@@ -34,11 +34,10 @@ def parse_jmeter_logs(file_name: str) -> None:
             failure_message_ind = row.index("failureMessage")
             break
 
-        local_timezone = tzlocal.get_localzone()
         for row in jmeter_logs:
             if int(row[response_code_ind]) != HTTPStatus.OK:
                 record_datetime = datetime.fromtimestamp(
-                    int(row[time_stamp_ind]) / 1000, local_timezone).strftime('%Y-%m-%d %H:%M:%S %Z')
+                    int(row[time_stamp_ind]) / 1000, pytz.timezone("US/Pacific")).strftime('%Y-%m-%d %H:%M:%S %Z')
                 print(record_datetime, row[label_ind], row[response_code_ind],
                       row[response_message_ind], row[failure_message_ind])
 

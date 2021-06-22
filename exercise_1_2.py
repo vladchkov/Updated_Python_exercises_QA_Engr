@@ -4,7 +4,7 @@ import pprint
 import xml.dom.minidom
 
 
-def set_depart_return_dates(x: int, y: int) -> None:
+def update_depart_return_dates(x: int, y: int) -> None:
     """
     Updates DEPARTS and RETURN fields, and writes the result to a new file
 
@@ -61,4 +61,4 @@ def remove_json_elem(json_elem: str) -> None:
 if __name__ == "__main__":
     remove_json_elem("appdate")
     # remove_json_elem("outParams")
-    set_depart_return_dates(6, 9)
+    update_depart_return_dates(6, 9)
